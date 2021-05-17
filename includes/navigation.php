@@ -8,20 +8,33 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Start Bootstrap</a>
+                <a class="navbar-brand" href="#">Home Films</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#">About</a>
-                    </li>
-                    <li>
-                        <a href="#">Services</a>
-                    </li>
-                    <li>
-                        <a href="#">Contact</a>
-                    </li>
+               
+                
+                
+                <?php
+                // query to fetech all categories for database 
+            $query = "SELECT * FROM categories ";
+            $select_all_categories_query = mysqli_query($connection, $query);
+            //  loop all the through the values in DB and assign them to an array var $row because it comes from an assoc array
+            while ($row = mysqli_fetch_assoc($select_all_categories_query)){
+                $cat_title = $row['cat_title'];
+                echo " <li>
+                <a herf='#'> {$cat_title}</a>
+                       </li>";
+            }
+            
+             ?>
+
+
+                   
+                    <!-- <li>
+                        <a href="#"></a>
+                    </li> -->
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
