@@ -43,7 +43,8 @@ while ($row = mysqli_fetch_assoc($select_all_posts_query)){
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date;?></p>
                 <hr>
-                <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                <!-- look at Docs/postimage.txt -->
+                <img class="img-responsive" src="images/<?php echo $post_image ;?>" alt="">
                 <hr>
                 <p> <?php echo $post_content ; ?></p>
                 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
