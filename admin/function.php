@@ -42,6 +42,7 @@ function findAllCategories(){
                                 echo "<tr>";
                                 echo " <td> {$cat_id}</td>  ";
                                 echo " <td> {$cat_title}</td>  ";
+                                // delete and edit links 
                                 echo "<td>  <a href='categories.php?delete={$cat_id}'>Delete</a></td>";
                                 echo "<td>  <a href='categories.php?edit={$cat_id}'>Edit</a></td>";
                                 echo "</tr>";
@@ -55,6 +56,7 @@ function deleteCategories(){
         $cat_id= $_GET['delete'];
         $query= " DELETE FROM categories WHERE cat_id= {$cat_id}";
         $delet_query= mysqli_query($connection, $query); 
+        // refresh page: if delete request redirect to  categories.php
         header("Location: categories.php");
 
     }
