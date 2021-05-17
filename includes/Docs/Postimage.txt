@@ -1,6 +1,0 @@
-we need to display the post image
-
-go to
-database is a software that organize data, so it takes the image name.type (reference)
-then
-in the img html tag src= put directory src=images/<?php echo $post_image?>
