@@ -83,7 +83,7 @@ if(isset($_POST['checkBoxArray'])){
                     
                 echo "<tr>";
                     ?>
-                    // All 9 columns for each row (post) attached to id checkbox and 3 links for edit delete view post
+                    <!-- All 9 columns for each row (post) attached to id checkbox and 3 links for edit delete view post-->
                     <td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' 
                     value='<?php echo  $post_id   ?>'></td>
 

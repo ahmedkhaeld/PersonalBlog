@@ -24,10 +24,11 @@ while ($row = mysqli_fetch_assoc($select_all_posts_query)){
     $post_image = $row['post_image'];
     $post_content = substr($row['post_content'], 0,100) ;
     $post_status = $row['post_status'];
+   
+    if($post_status == 'published'){
+        ?>   
     
-        
-    
- ?>
+ 
 
                 <h1 class="page-header">
                     Page Heading
@@ -52,7 +53,7 @@ while ($row = mysqli_fetch_assoc($select_all_posts_query)){
 
                 <hr>
 
-                <?php   }?>
+                <?php  } }?>
 </div>
 
                
