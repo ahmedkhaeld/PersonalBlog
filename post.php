@@ -59,7 +59,8 @@
 
 
 
-   <?php 
+   <?php
+   //query to insert comments post_id and the other values user typed to database 
 
    if(isset($_POST['create_comment'])){
     $the_post_id= $_GET['p_id'];

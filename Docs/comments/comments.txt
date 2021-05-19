@@ -1,0 +1,8 @@
+from navigation bar when admin press on comment it process the comments.php page 
+which sends admin to viewallcomments
+
+IMPORTANT
+post.php contains the form to submit a comment from the user to specific post.php
+so 
+make a query to insert 4 values into comments table (post id & post author & post email & post content) 
+now in comment_post_id has post_id 
