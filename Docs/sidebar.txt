@@ -1,0 +1,9 @@
+At sidebar.php
+every category dispalyed as links theses link has key that has a value to direct user to posts that has this category.
+echo " <li><a href='category.php?category=$cat_id'> {$cat_title}</a></li>";
+
+At category.php
+after user clicked the link, 
+if(isset($_GET['category'])) fetch the value of 'category'
+then 
+display all posts that have this category
