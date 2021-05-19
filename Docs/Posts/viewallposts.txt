@@ -1,0 +1,7 @@
+first create a table to display all posts, also the table has a select field to updat post status  
+
+make a query to fetch all posts each with its columns
+$query = "SELECT * FROM posts ";
+loop through all the columns asigne the values to variables
+echo each post columns value in the table
+Note: category column has to be equal to its post so we make a conditional statement to get the category for this specific post

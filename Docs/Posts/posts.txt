@@ -1,0 +1,14 @@
+at navigation, post has two options viewallposts and add_post. inside those links we direct the user 
+e.g:  <a href="./posts.php?source=add_post">Add Posts</a>  
+notice the link contains the source variable equal to one of the cases 
+
+here by switch statement to check the what user want 
+use $_GET to take what users enter, use one variable to show different pages 
+this $source: is made to be make various functionality with post edit, delete, or viewallpost
+so $_GET['$source'] has what user entered
+case 'add_post';
+    include "includes/add_post.php";
+or 
+case 'edit_post';
+   include "includes/edit_post.php";
+or the default which will be viewallposts

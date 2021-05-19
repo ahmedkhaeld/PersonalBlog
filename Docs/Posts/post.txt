@@ -1,0 +1,4 @@
+this page to display all the posts according to some criteria
+
+if post status is equla to published display 
+if user want to view one specific post by its 

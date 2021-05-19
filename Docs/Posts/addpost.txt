@@ -1,0 +1,13 @@
+form to add new post
+when user click on the navigatin bar dropdown add_post it direct him to page has form to add new posts
+the form fields to create a new post similar to attribute in the database
+after user click submit
+we make the query to the database to INSERT the new VALUES
+
+
+
+this peice of code to get the new post id that is just has been create to give user option if he wants to view that specific post
+$the_post_id= mysqli_insert_id($connection);
+      echo " <p class='bg-success'> Post Created. <a href='../post.php?p_id={$the_post_id}'> View Post</a>
+      OR <a href='posts.php'> Edit More Posts</a></p>";
+        

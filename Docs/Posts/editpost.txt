@@ -1,0 +1,12 @@
+At view_all_posts page when user clicks at this link.
+echo "<td> <a href='posts.php?source=edit_post&p_id={$post_id}'> Edit </a></td>";
+if soucre=edit AND  p_id will have the id for which post the user click at its delete link
+
+now the user is directed to edit_post page 
+a query to get this specific post data and place them to make the update using its id 
+
+
+at the form that dispalyed the values and the user entered the updated VALUES
+if  isset($_POST['update_post']) true 
+make the update query to each invidual column
+
