@@ -1,0 +1,10 @@
+creat login form to get user information
+
+if user entered valide info according to the stored in db
+make a query to fetch user information 
+then start a session 
+assign user info for the session 
+direct user according to role to suitable side whether home site or admin area 
+
+logout user 
+if user click log out redirect to home page after clear all session data 

@@ -1,3 +1,18 @@
+<?php ob_start();?>
+<?php include "db.php"?>
+<?php session_start(); ?>
+<?php 
+if(isset($_SESSION['user_role'])){
+    if($_SESSION['user_role']!=='admin'){
+        header("Location: ../index.php");
+    }
+    
+ 
+    
+}  
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
