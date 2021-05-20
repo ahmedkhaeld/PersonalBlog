@@ -1,0 +1,15 @@
+page which has a table to display all users info 
+besides some functions to edit delete or change users role
+
+Functions: 
+if admin clicks on  admin link this gives back a value we collect it by $_GET
+if (isset($_GET['change_to_admin']))
+then updat the user role to Admin
+
+if admin clicks on  subscriber link this gives back a value we collect it by $_GET
+if (isset($_GET['change_to_sub']))
+then updat the user role to subscriber
+
+if admin clicks on  delete link this gives back a value we collect it by $_GET
+if (isset($_GET['delete']))
+then delete user from database

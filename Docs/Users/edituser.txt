@@ -1,0 +1,7 @@
+edit user page     
+if admin clicked on edit link then we have a specific user needs to be updated, this check done by $_GET 
+then fetch this user informations 
+and display it by default in the form
+
+secondly if admin submitted
+then make update query

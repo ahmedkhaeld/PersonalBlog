@@ -1,0 +1,8 @@
+If Admin clicks at users nav bar then we have a value so we collect that value using $_GET global variable
+if isset then we have various cases 
+Default and Main case 
+source is not the sub pages edit or add user then it direct admin to viewallusers 
+case source=add
+it directs admin to add user page which has a form to create a new user and send its data to data base
+case source=edit
+it direct admin to edit use page which has a form to updat current user info and send it to data base

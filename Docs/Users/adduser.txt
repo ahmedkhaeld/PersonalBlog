@@ -1,0 +1,3 @@
+add user page contains a form to create a new user
+using $_POST to collect form data  if (isset($_POST['create_user'])) means admin submitted 
+then make the query according to user table
