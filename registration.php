@@ -14,17 +14,9 @@
      $username = mysqli_real_escape_string($connection,$username);
      $email    = mysqli_real_escape_string($connection,$email);
      $password =mysqli_real_escape_string($connection,$password);
-     
-     // in the database the defualt of randsalt changed to As defined $2y$q0$iusesomecrazystrings22
-     $query="SELECT randsalt FROM users";
-     $select_randsalt_query=mysqli_query($connection, $query);
-     if(! $select_randsalt_query){
-         die( "QUERY FAILED" . mysqli_error($connection));
-     }
 
-     $row=mysqli_fetch_array($select_randsalt_query);
-     $salt= $row['randsalt'];
-    //  $password=crypt($password, $salt);
+     $password=password_hash( $password, PASSWORD_BCRYPT, array('cost=>12'));
+     
 
      $query=" INSERT INTO users (user_name, user_email, user_password, user_role)";
      $query.= " VALUES ('{$username}', '{$email}', '{$password}', 'subscriber')";
