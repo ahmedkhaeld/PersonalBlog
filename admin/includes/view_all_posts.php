@@ -21,6 +21,32 @@ if(isset($_POST['checkBoxArray'])){
                         $upate_to_delete_status= mysqli_query($connection, $query);
                         confirmQuery($upate_to_delete_status);
                         break;
+                    case 'clone':
+                        $query="SELECT * FROM posts WHERE post_id='{$postVauleId}'";
+                        $select_post_query=mysqli_query($connection, $query);
+
+                        while($row=mysqli_fetch_array($select_post_query)){
+                            $post_title=$row['post_title'];
+                            $post_category_id=$row['post_category_id'];
+                            $post_date=$row['post_date'];
+                            $post_author = $row ['post_author'];
+                            $post_status = $row ['post_status'];
+                            $post_image = $row ['post_image'];
+                            $post_tags = $row ['post_tags'];
+                            $post_content = $row ['post_content'];
+                        }
+
+                        $query= " INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, 
+                        post_tags, post_status)";
+                        $query.= "VALUES ({$post_category_id}, '{$post_title}', '{$post_author}', now(), '{$post_image}',  
+                        '{$post_content}', '{$post_tags}', '{$post_status}')";
+                        $copy_query=mysqli_query($connection, $query);
+                        if(! $copy_query){
+                            die("QUERY FAILED" . mysqli_error($connection));
+                        }
+                      break;
+       
+
         }
 
     }
@@ -38,6 +64,7 @@ if(isset($_POST['checkBoxArray'])){
         <option value="published"> Publish</option>
         <option value="draft"> Draft</option>
         <option value="delete"> Delete</option>
+        <option value="clone"> Clone</option>
         </select>
         </div>
 
@@ -50,7 +77,7 @@ if(isset($_POST['checkBoxArray'])){
                 <tr>
                     <th> <input id="selectAllBoxes " type="checkbox"></th>
                     <th>Id </th>
-                    <th>Author</th>
+                    <th>User</th>
                     <th>Title</th>
                     <th>Category</th>
                     <th>Status</th>
@@ -61,18 +88,20 @@ if(isset($_POST['checkBoxArray'])){
                     <th>View Post</th>
                     <th>Edit</th>
                     <th>Delete</th>
+                    <th>Views</th>
                 </tr>
             </thead>
 
         <tbody>
             <?php      
-                $query = "SELECT * FROM posts ";
+                $query = "SELECT * FROM posts ORDER  BY post_id DESC ";
                 $select_posts= mysqli_query($connection, $query);
             
                 // loop for all posts
                 while ($row = mysqli_fetch_assoc($select_posts)) {
                     $post_id = $row ['post_id'];
                     $post_author = $row ['post_author'];
+                    $post_user = $row ['post_user'];
                     $post_title = $row ['post_title'];
                     $post_category_id= $row ['post_category_id'];
                     $post_status = $row ['post_status'];
@@ -80,6 +109,7 @@ if(isset($_POST['checkBoxArray'])){
                     $post_tags = $row ['post_tags'];
                     $post_comment_count= $row ['post_comment_count'];
                     $post_date = $row ['post_date'];
+                    $post_views_count = $row ['post_views_count']; 
                     
                 echo "<tr>";
                     ?>
@@ -88,9 +118,17 @@ if(isset($_POST['checkBoxArray'])){
                     value='<?php echo  $post_id   ?>'></td>
 
                     <?php
-                    echo"<td>$post_id </td> "    ;
-                    echo  "<td> $post_author</td>";
+                    echo"<td>$post_id </td> " ;
+                    if(!empty($post_author)){
+                        echo  "<td> $post_author</td>";
+                    }elseif(!empty($post_user)){
+                        echo  "<td> $post_user</td>"; 
+                    }
+
+                   
+                    
                     echo  "<td>$post_title</td>";
+
                     // fetch the post category from the category table compare the post_id and its category 
                     $query = "SELECT * FROM categories WHERE cat_id= {$post_category_id} ";
                     $select_categories_id= mysqli_query($connection, $query);
@@ -104,7 +142,14 @@ if(isset($_POST['checkBoxArray'])){
                     echo  "<td> $post_status</td>";
                     echo  "<td><img width='100' src='../images/$post_image' alt='image' </td>";
                     echo  "<td> $post_tags</td>";
-                    echo  "<td>$post_comment_count</td>";
+
+                    $query="SELECT * FROM comments WHERE comment_post_id =$post_id";
+                    $send_comment_query=mysqli_query($connection, $query);
+                    $row=mysqli_fetch_array($send_comment_query);
+                    $comment_id=$row['comment_id'];
+                    $count_comments=mysqli_num_rows($send_comment_query);
+                    echo  "<td> <a href='post_comments.php?comment_id=$post_id'>$count_comments</a></td>";
+
                     echo " <td>$post_date </td>";
                     // link to direct the admin to view the updated post 
                     echo "<td> <a href='../post.php?p_id={$post_id}'> View post  </a></td>";
@@ -113,7 +158,9 @@ if(isset($_POST['checkBoxArray'])){
                     //link with js confirmation function to delete post
                     echo "<td> <a onClick=\"javascript: return confirm('Are you sure you want to delete');\" 
                     href='posts.php?delete={$post_id}'> DELETE</a></td>";
+                    echo  "<td><a href='posts.php?reset={$post_id}'>{$post_views_count}</a></td>";
                     echo"</tr>";
+                
                     
 
                     
@@ -136,5 +183,17 @@ if (isset($_GET['delete'])) {
     header("Location: posts.php");
 
 }
+
+if (isset($_GET['reset'])) {
+    $the_post_id=$_GET['reset'];
+    $query="UPDATE posts SET post_views_count=0 WHERE post_id = ".mysqli_real_escape_string($connection,$_GET['reset'])."";
+    $reset_query= mysqli_query($connection, $query);
+    // refresh the page quickly
+    header("Location: posts.php");
+
+}
+
+
+
 ?>
 

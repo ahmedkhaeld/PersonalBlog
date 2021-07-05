@@ -11,15 +11,35 @@
 
             <!-- Blog Entries Column -->
             <div class="col-md-8">
-<?php 
+<?php
+// build pagination system for the content
+if(isset($_GET['page'])){
+    $page = $_GET['page'];
 
-$query= "SELECT * FROM posts ";
+}else{
+    $page="";
+
+}
+if($page==""|| $page==0){
+    $page_1=0;
+}else{
+    $page_1=($page *5) ;
+}
+
+// query to find how many posts we have
+$post_query_count= "SELECT * FROM posts";
+$find_count=mysqli_query($connection, $post_query_count);
+ $count=mysqli_num_rows($find_count);
+ // content per page
+ $count=ceil($count/5);
+// to make dynamically change the range  that each page has to display 5 posts and page_1 increases by 5 
+$query= "SELECT * FROM posts limit $page_1, 5";
 $select_all_posts_query = mysqli_query($connection, $query);
 
 while ($row = mysqli_fetch_assoc($select_all_posts_query)){
     $post_id = $row['post_id'];
     $post_title = $row['post_title'];
-    $post_author = $row['post_author'];
+    $post_user = $row['post_user'];
     $post_date= $row['post_date'];
     $post_image = $row['post_image'];
     $post_content = substr($row['post_content'], 0,100) ;
@@ -31,7 +51,8 @@ while ($row = mysqli_fetch_assoc($select_all_posts_query)){
  
 
                 <h1 class="page-header">
-                    Page Heading
+                    Page Heading 
+                    
                     <small>Secondary Text</small>
                 </h1>
 
@@ -40,7 +61,7 @@ while ($row = mysqli_fetch_assoc($select_all_posts_query)){
                 <a href="post.php?p_id=<?php echo $post_id;  ?>"><?php echo $post_title;  ?></a>
                 </h2>
                 <p class="lead">
-                by <a href="#"><?php echo $post_author;  ?></a>
+                by <a href="user_posts.php?user=<?php echo $post_user;  ?>&p_id=<?php echo $post_id;  ?>"><?php echo $post_user;  ?></a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> <?php echo $post_date;?></p>
                 <hr>
@@ -68,6 +89,19 @@ while ($row = mysqli_fetch_assoc($select_all_posts_query)){
         <!-- /.row -->
 
         <hr>
+        <ul class="pager">
+        <?php 
+        // link that each page have content equals to count per page
+        for($i = 0; $i <$count;$i++) {
+            echo "<li><a href='index.php?page={$i}'>{$i}</a></li>";
+        }
+        ?>
+        
+        
+        
+        </ul>
+
+
 
        
        

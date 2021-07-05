@@ -1,8 +1,9 @@
 <?php
+// Asign the admin users to their own posts so we change author coumn to user
   // query to take what user submitted and insert those value to the database
   if (isset($_POST['create_post'])) {
       $post_title        = $_POST['title'];
-      $post_author         =$_POST['post_author'];
+      $post_user        =$_POST['post_user'];
       $post_category_id  = $_POST['post_category'];
       $post_status       = $_POST['post_status'];
 
@@ -11,13 +12,13 @@
       $post_tags         = $_POST['post_tags'];
       $post_content      = $_POST['post_content'];
       $post_date         = date('d-m-y');
-      // $post_comment_count=4;
+      
 
       move_uploaded_file($post_image_temp, "../images/$post_image" ); 
       
-      $query= " INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, 
+      $query= " INSERT INTO posts(post_category_id, post_title, post_user, post_date, post_image, post_content, 
       post_tags, post_status)";
-      $query.= "VALUES ({$post_category_id}, '{$post_title}', '{$post_author}', now(), '{$post_image}',  
+      $query.= "VALUES ({$post_category_id}, '{$post_title}', '{$post_user}', now(), '{$post_image}',  
       '{$post_content}', '{$post_tags}', '{$post_status}')";
       $create_post_query = mysqli_query($connection, $query);
 
@@ -42,28 +43,42 @@
      </div>
 
      <div class="form-group">
-        <label for="categories">categories</label>
-        </br>
-      <select name="post_category" id="">
-      <?php 
-      $query = "SELECT * FROM categories  ";
-      $select_categories= mysqli_query($connection, $query);
-     confirmQuery($select_categories);
-      
-      while ($row = mysqli_fetch_assoc($select_categories)) {
-          $cat_id= $row['cat_id'];
-          $cat_title=$row['cat_title'];
+          <label for="categories">categories</label>
+        <select name="post_category" id="">
+        <?php 
+        $query = "SELECT * FROM categories  ";
+        $select_categories= mysqli_query($connection, $query);
+          confirmQuery($select_categories);
+        
+          while ($row = mysqli_fetch_assoc($select_categories)) {
+              $cat_id= $row['cat_id'];
+              $cat_title=$row['cat_title'];
 
-          echo "<option value='{$cat_id}'>{$cat_title} </option>";   
-      }  
-      ?>
-      </select>
+              echo "<option value='{$cat_id}'>{$cat_title} </option>";   
+          }  
+          ?>
+        </select>
       </div>
 
       <div class="form-group">
-      <label for="title">Post Author</label>
-    <input type="text" class="form-control" name="post_author">
-     </div>
+          <label for="users">Users</label>
+        <select name="post_user" id="">
+        <?php 
+        $users_query = "SELECT * FROM users  ";
+        $select_users= mysqli_query($connection, $users_query);
+          confirmQuery($select_users);
+        
+          while ($row = mysqli_fetch_assoc($select_users)) {
+              $user_id= $row['user_id'];
+              $user_name= $row['user_name'];
+
+              echo "<option value='{$user_name}'>{$user_name} </option>";   
+          }  
+          ?>
+        </select>
+      </div>
+
+  
       <div class="form-group">
      <!-- select option to choose post status  -->
           <select name="post_status" id="">
