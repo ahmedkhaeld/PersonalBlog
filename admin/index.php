@@ -1,6 +1,13 @@
 <?php include "includes/header.php"?>
 
     <div id="wrapper">
+<?php 
+
+
+
+
+
+?>
 
         <!-- Navigation -->
         <?php include "includes/navigation.php"?>
@@ -16,6 +23,7 @@
                             Blank Page
                             <small><?php echo $_SESSION['username'] ?></small>
                         </h1>
+                      
                         <ol class="breadcrumb">
                             <li>
                                 <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
