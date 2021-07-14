@@ -62,7 +62,7 @@
                         </ul> 
                     </li>
                     <li>
-                        <a href=""><i class="fa fa-fw fa-wrench"></i> Gategories </a>
+                        <a href="./categories.php"><i class="fa fa-fw fa-wrench"></i> Gategories </a>
                     </li>
                     <li class="">
                     <a href="./comments.php"><i class="fa fa-fw fa-file"></i> Comments</a>

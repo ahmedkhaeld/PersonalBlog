@@ -50,12 +50,7 @@ while ($row = mysqli_fetch_assoc($select_all_posts_query)){
     
  
 
-                <h1 class="page-header">
-                    Page Heading 
-                    
-                    <small>Secondary Text</small>
-                </h1>
-
+               
                 <!-- First Blog Post -->
                 <h2>
                 <a href="post.php?p_id=<?php echo $post_id;  ?>"><?php echo $post_title;  ?></a>
@@ -72,7 +67,7 @@ while ($row = mysqli_fetch_assoc($select_all_posts_query)){
                 <p> <?php echo $post_content ; ?></p>
                 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
-                <hr>
+                
 
                 <?php  } }?>
 </div>
